@@ -22,6 +22,7 @@ services:
       - RABBITMQ_URL=amqp://user:password@rabbitmq:5672/
     volumes:
       - .:/app
+    command: celery -A tasks worker --loglevel=info --queues=tasks --concurrency=2
 
   scheduler:
     build:
@@ -33,3 +34,18 @@ services:
       - RABBITMQ_URL=amqp://user:password@rabbitmq:5672/
     volumes:
       - .:/app
+
+  flower:
+    image: mher/flower
+    container_name: flower
+    depends_on:
+      - rabbitmq
+      - worker
+    volumes:
+      - ./worker/:/data
+    environment:
+      - CELERY_BROKER_URL=amqp://user:password@rabbitmq:5672/
+      - FLOWER_UNAUTHENTICATED_API=true
+    ports:
+      - "5555:5555"
+    command: celery flower --broker=amqp://user:password@rabbitmq:5672/

@@ -1,4 +1,7 @@
-FROM python:3.9-slim
+FROM python:3.12-bookworm
+
+RUN pip install playwright && \
+  playwright install --with-deps
 
 WORKDIR /app
 
@@ -8,5 +11,5 @@ WORKDIR /app/worker
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["celery", "-A", "tasks", "worker", "--loglevel=info"]
+# CMD ["celery", "-A", "tasks", "worker", "--loglevel=info", "--queues=tasks"]
 
