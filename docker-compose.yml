@@ -22,7 +22,7 @@ services:
       - RABBITMQ_URL=amqp://user:password@rabbitmq:5672/
     volumes:
       - .:/app
-    command: celery -A tasks worker --loglevel=info --queues=tasks --concurrency=2
+    command: celery -A tasks worker --loglevel=info --queues=tasks --concurrency=1
 
   scheduler:
     build:

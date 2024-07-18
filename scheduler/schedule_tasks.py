@@ -1,4 +1,3 @@
-
 import pika
 import json
 import os
@@ -15,7 +14,7 @@ try:
     channel.queue_declare(queue=queue_name, durable=True)
 
     task = {
-        'url': 'https://google1.com',
+        'url': 'https://google.com',
         'screenshot_path': 'google.png'
     }
 

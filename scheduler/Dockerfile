@@ -8,4 +8,4 @@ WORKDIR /app/scheduler
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python", "schedule_tasks.py"]
+CMD ["python", "chain_tasks.py"]

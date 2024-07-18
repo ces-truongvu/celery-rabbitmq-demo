@@ -1,6 +1,6 @@
 FROM python:3.12-bookworm
 
-RUN pip install playwright && \
+RUN pip install playwright Pillow && \
   playwright install --with-deps
 
 WORKDIR /app

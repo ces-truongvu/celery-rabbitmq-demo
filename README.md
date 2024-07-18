@@ -23,10 +23,18 @@ cd celery-rabbitmq-demo
 docker-compose up -d
 ```
 
-### Capture image
+### Modify Worker
+
+After modify worker you need to restart the worker container, here is the command:
+
+```
+docker-compose stop worker && docker-compose rm -f worker && docker-compose up -d worker && docker-compose logs -f worker
+```
+
+### Capture image by activate the scheduler
 
 ```sh
 docker up scheduler
 ```
 
-After that, you should find an image named `google.png` in the scheduler folder
+After that, you should find an image named `google.png` and `google_thumb.jpg` in the worker folder
