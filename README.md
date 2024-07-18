@@ -23,6 +23,10 @@ cd celery-rabbitmq-demo
 docker-compose up -d
 ```
 
+### Access flower
+
+Open browser and go to `http://localhost:5555` to access flower dashboard.
+
 ### Modify Worker
 
 After modify worker you need to restart the worker container, here is the command:
@@ -38,3 +42,7 @@ docker up scheduler
 ```
 
 After that, you should find an image named `google.png` and `google_thumb.jpg` in the worker folder
+
+### Multi workers
+
+Open `docker-compose.yml` and duplicated worker service, you will see one scheduler can be run on multi worker. This is the power of Celery.

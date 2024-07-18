@@ -22,7 +22,20 @@ services:
       - RABBITMQ_URL=amqp://user:password@rabbitmq:5672/
     volumes:
       - .:/app
-    command: celery -A tasks worker --loglevel=info --queues=tasks --concurrency=1
+    command: celery -A tasks worker --loglevel=info --queues=tasks --concurrency=2
+
+  worker1:
+    build:
+      context: .
+      dockerfile: ./worker/Dockerfile
+    container_name: worker
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ_URL=amqp://user:password@rabbitmq:5672/
+    volumes:
+      - .:/app
+    command: celery -A tasks worker --loglevel=info --queues=tasks --concurrency=2
 
   scheduler:
     build:
